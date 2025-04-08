@@ -1,6 +1,7 @@
 ## Setup
 
 Download video data and real doppler data from Midas.
+Install Midas from: https://github.com/dkkmy/Midas
 
 We recommend setting up each step in a separate conda environment
 
@@ -65,7 +66,8 @@ Then run with:
 ```
 python -m cmmd.main /home/max/Results/dopplerVisualisationLOO/real_images_jpg /home/max/Results/dopplerVisualisationLOO/reconstructed_images_jpg
 ```
-To calculate classification accuracy first install the vi
+To calculate classification accuracy move train_vgg16_classifier_custom.py and train_vgg16_classifier_diffusion_custom.py into the folder you installed Midas then edit the data_path and real_data_path. 
+Remember to change the subject for leave one out validation by changing the value on line 54/55.
 
 
 
