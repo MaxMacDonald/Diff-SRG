@@ -37,6 +37,13 @@ Run batch_run_encoder_decoder.py twice, using autoencoderDKK.hdf5 to generated d
 You can visualise this data using the visualiseDopplerData.py script
 
 ## Diffusion model
+Install Radar-Diffusion from: https://github.com/ZJU-FAST-Lab/Radar-Diffusion
+
+Replace dist_util and train_util_cond inside the _Radar-Diffusion-custom/diffusion_consistency_radar/cm_ directory with the ones included in this project. They contain modifications that allow for training with the doppler data.
+
+Move the files in launch into _Radar-Diffusion-custom/diffusion_consistency_radar/launch_. These are used to launch the scripts. You will have to modify the path at the start of each to match your system.
+
+Move the files in scripts into _Radar-Diffusion-custom/diffusion_consistency_radar/scripts_
 
 
 ## Evaluation
@@ -50,6 +57,7 @@ Then run with:
 ```
 python -m cmmd.main /home/max/Results/dopplerVisualisationLOO/real_images_jpg /home/max/Results/dopplerVisualisationLOO/reconstructed_images_jpg
 ```
+To calculate classification accuracy first install the vi
 
 
 
