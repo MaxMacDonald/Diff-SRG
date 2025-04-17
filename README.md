@@ -27,6 +27,8 @@ Run OSXBatchAll.py with the following command:
 Run generateCourseDopplerDataBatch.py
 
 ## Fine Grain Translation
+
+### UNet Auto-encoder
 Set up the environment as follows:
 ```
 conda create --name encoderdecoder
@@ -37,13 +39,23 @@ which -a pip
 PIPLOCATION install tensorflow==2.4.0
 ```
 
-Run custom_train_encoder_decoder.py once for zzh and then again for dkk
+Run custom_train_encoder_decoder.py once for zzh and then again for dkk.
 
-Run batch_run_encoder_decoder.py twice, using autoencoderDKK.hdf5 to generated data for zzh and autoencoderZZH.hdf5 for dkk
+Run batch_run_encoder_decoder.py twice, using autoencoderDKK.hdf5 to generated data for zzh and autoencoderZZH.hdf5 for dkk.
 
-You can visualise this data using the visualiseDopplerData.py script
+You can visualise this data using the visualiseDopplerData.py script.
 
-## Diffusion model
+### Transformer Autoencoder
+
+Run The TransformerAutoencoderTraining.py file to train the model. As with the Unet auto-encoder remember to change subject for leave one out. You will have to change file paths.
+
+Run TransformerAutoencoderPredict.py to generate fine grain data, again in a leave one out fashion.
+
+inspectModel.py is included to allow inspection of the architecture.
+
+you can visualise this data using the visualiseDopplerDataDiffusion.py script.
+
+### Diffusion model
 Install Radar-Diffusion from: https://github.com/ZJU-FAST-Lab/Radar-Diffusion
 
 Replace dist_util and train_util_cond inside the _Radar-Diffusion-custom/diffusion_consistency_radar/cm_ directory with the ones included in this project. They contain modifications that allow for training with the doppler data.

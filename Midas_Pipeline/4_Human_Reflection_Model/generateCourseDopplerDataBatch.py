@@ -17,6 +17,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_folder', type=str, default='input_images')
     parser.add_argument('--output_folder', type=str, default='out_folder')
+    parser.add_argument('--depth_folder', type=str, default='depth_folder')
     args = parser.parse_args()
     return args
 
@@ -94,6 +95,27 @@ if __name__ == "__main__":
     input_paths = []
     output_paths = []
 
+    depthdata_list = []
+    # load depth files
+    for filename in os.listdir(args.depth_folder):
+        if filename.endswith('.npy'):
+            file_path = os.path.join(args.depth_folder, filename)
+            data = np.load(file_path)
+            
+            ### Calculate the distance away from the subject using depth data.
+            height, width = data.shape[-2], data.shape[-1]
+            # Extract the center region
+            center_x, center_y = height // 2, width // 2  # Finding the central indices
+            size = 50  # Define the size of the region
+
+            # Extract the 10x10 region around the center
+            center_region = data[0, 0, center_x - size//2:center_x + size//2, center_y - size//2:center_y + size//2]
+
+            # Compute the average of the extracted region
+            center_avg_distance = np.mean(center_region)
+            depthdata_list.append(center_avg_distance)
+    sensor_depth = np.mean(depthdata_list)
+
     for root, dirs, files in os.walk(args.input_folder):
         for d in dirs:
             dir_path = os.path.join(root, d)
@@ -110,7 +132,7 @@ if __name__ == "__main__":
     print(len(output_paths))
     fps = 30
     delta_t = 1 / fps
-    sensor_position = np.array([0, 1, 3])
+    sensor_position = np.array([0, 1, sensor_depth])
     with alive_bar(numfolders) as bar:
         for in_folder,out_folder in zip(input_paths,output_paths):
             obj_files = sorted(glob.glob(os.path.join(in_folder, "*.obj")))
