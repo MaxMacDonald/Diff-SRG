@@ -1,3 +1,6 @@
+## Introduction
+Diff-SRG is a Diffsion based Sytnthetic Radar data Generation pipline inspired by work like Midas and Vid2Doppler
+
 ## Setup
 
 Download video data and real doppler data from Midas.
