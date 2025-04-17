@@ -81,5 +81,6 @@ python -m cmmd.main /home/max/Results/dopplerVisualisationLOO/real_images_jpg /h
 To calculate classification accuracy move train_vgg16_classifier_custom.py and train_vgg16_classifier_diffusion_custom.py into the folder you installed Midas then edit the data_path and real_data_path. 
 Remember to change the subject for leave one out validation by changing the value on line 54/55.
 
-
+## License
+This work is published under the MIT license
 
